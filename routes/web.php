@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,13 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+    
 });
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::resource('orders',OrdersController::class)
+->middleware(['auth:sanctum','verified']);
